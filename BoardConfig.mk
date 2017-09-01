@@ -4,7 +4,7 @@
 LOCAL_PATH := device/Explay/JoyTV
 
 # Off NINJA
-USE_NINJA := false
+#USE_NINJA := false
 
 # Board
 TARGET_BOARD_PLATFORM := mt6572
