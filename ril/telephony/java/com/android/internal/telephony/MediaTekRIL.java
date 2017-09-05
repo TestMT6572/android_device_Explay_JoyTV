@@ -334,6 +334,23 @@ public class MediaTekRIL extends RIL implements CommandsInterface {
     }
 
     @Override
+    public void
+    setRadioPower(boolean on, Message result) {
+	if ((mInstanceId != null && mInstanceId == 1)) {
+		riljLog("SetRadioPower: on/off ignored on SIM2");
+		return;
+	}
+
+        RILRequest rr = RILRequest.obtain(RIL_REQUEST_DUAL_SIM_MODE_SWITCH, result);
+
+        if (RILJ_LOGD) riljLog(rr.serialString() + "> " + requestToString(rr.mRequest));
+
+        rr.mParcel.writeInt(1);
+        rr.mParcel.writeInt(on ? 3 : -1); // SIM1 | SIM2 ?
+        send(rr);
+    }
+
+    @Override
     public void getRadioCapability(Message response) {
         riljLog("getRadioCapability: returning static radio capability");
         if (response != null) {
