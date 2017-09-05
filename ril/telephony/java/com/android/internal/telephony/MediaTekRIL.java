@@ -362,7 +362,7 @@ public class MediaTekRIL extends RIL implements CommandsInterface {
     // all that C&P just for responseOperator overriding?
     @Override
     protected RILRequest
-    processSolicited (Parcel p) {
+    processSolicited (Parcel p, int type) {
         int serial, error;
         boolean found = false;
 
@@ -551,7 +551,7 @@ public class MediaTekRIL extends RIL implements CommandsInterface {
 
     @Override
     protected void
-    processUnsolicited (Parcel p) {
+    processUnsolicited (Parcel p, int type) {
         Object ret;
         int dataPosition = p.dataPosition(); // save off position within the Parcel
         int response = p.readInt();
@@ -594,7 +594,7 @@ public class MediaTekRIL extends RIL implements CommandsInterface {
                 p.setDataPosition(dataPosition);
 
                 // Forward responses that we are not overriding to the super class
-                super.processUnsolicited(p);
+                super.processUnsolicited(p, type);
                 return;
         }
 
@@ -654,7 +654,7 @@ public class MediaTekRIL extends RIL implements CommandsInterface {
             // And rewind again in front
             p.setDataPosition(dataPosition);
 
-            super.processUnsolicited(p);
+            super.processUnsolicited(p, type);
         }
     }
 	
@@ -862,20 +862,20 @@ public class MediaTekRIL extends RIL implements CommandsInterface {
     // Override setupDataCall as the MTK RIL needs 8th param CID (hardwired to 1?)
     @Override
     public void
-    setupDataCall(String radioTechnology, String profile, String apn,
-            String user, String password, String authType, String protocol,
+    setupDataCall(int radioTechnology, int profile, String apn,
+            String user, String password, int authType, String protocol,
             Message result) {
         RILRequest rr
                 = RILRequest.obtain(RIL_REQUEST_SETUP_DATA_CALL, result);
 
         rr.mParcel.writeInt(8);
 
-        rr.mParcel.writeString(radioTechnology);
-        rr.mParcel.writeString(profile);
+        rr.mParcel.writeStringInt(radioTechnology);
+        rr.mParcel.writeStringInt(profile);
         rr.mParcel.writeString(apn);
         rr.mParcel.writeString(user);
         rr.mParcel.writeString(password);
-        rr.mParcel.writeString(authType);
+        rr.mParcel.writeStringInt(authType);
         rr.mParcel.writeString(protocol);
         rr.mParcel.writeString("1");
 
