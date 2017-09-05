@@ -66,6 +66,8 @@ public class MediaTekRIL extends RIL implements CommandsInterface {
     private String voiceRegState = "0";
     private String voiceDataTech = "0";
 
+    int mSimId = 0;
+
     public MediaTekRIL(Context context, int preferredNetworkType, int cdmaSubscription, Integer instanceId) {
 	    super(context, preferredNetworkType, cdmaSubscription, instanceId);
     }
