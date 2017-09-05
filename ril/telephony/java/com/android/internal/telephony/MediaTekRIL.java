@@ -870,12 +870,12 @@ public class MediaTekRIL extends RIL implements CommandsInterface {
 
         rr.mParcel.writeInt(8);
 
-        rr.mParcel.writeStringInt(radioTechnology);
-        rr.mParcel.writeStringInt(profile);
+        rr.mParcel.writeInt(radioTechnology);
+        rr.mParcel.writeInt(profile);
         rr.mParcel.writeString(apn);
         rr.mParcel.writeString(user);
         rr.mParcel.writeString(password);
-        rr.mParcel.writeStringInt(authType);
+        rr.mParcel.writeInt(authType);
         rr.mParcel.writeString(protocol);
         rr.mParcel.writeString("1");
 
