@@ -22,11 +22,11 @@
 __BEGIN_DECLS
 
 /** Maximum number of GNSS SVs for gps_sv_status_callback(). */
-#define GNSS_MAX_SVS 256
+#define MTK_LEGACY_GNSS_MAX_SVS 256
 
 /** Represents GNSS SV information. */
 typedef struct {
-    /** set to sizeof(GnssSvInfo) */
+    /** set to sizeof(MTKLegacyGnssSvStatus) */
     size_t          size;
     /** Pseudo-random number for the SV. */
     int     prn;
@@ -48,19 +48,19 @@ typedef struct {
      * SVs were used for computing the most recent position fix.
      */
     bool used_in_fix;
-} GnssSvInfo;
+} MTKLegacyGnssSvInfo;
 
 /** Represents GNSS SV status. */
 typedef struct {
-    /** set to sizeof(GnssSvStatus) */
+    /** set to sizeof(MTKLegacyGnssSvStatus) */
     size_t          size;
 
     /** Number of SVs currently visible. */
     int         num_svs;
 
     /** Contains an array of GNSS SV information. */
-    GnssSvInfo   sv_list[GNSS_MAX_SVS];
-} GnssSvStatus;
+    MTKLegacyGnssSvInfo   sv_list[MTK_LEGACY_GNSS_MAX_SVS];
+} MTKLegacyGnssSvStatus;
 
 /**
  * Callback with GNSS SV status information.
