@@ -66,7 +66,7 @@ typedef struct {
  * Callback with GNSS SV status information.
  * Can only be called from a thread created by create_thread_cb.
  */
-typedef void (* gnss_sv_status_callback)(MTKLegacyGnssSvStatus* sv_info);
+typedef void (* gnss_sv_status_callback_mtk)(MTKLegacyGnssSvStatus* sv_info);
 
 /** GPS callback structure with Mediatek extension. */
 typedef struct _GpsCallbacks_mtk {
