@@ -69,7 +69,7 @@ typedef struct {
 typedef void (* gnss_sv_status_callback_mtk)(MTKLegacyGnssSvStatus* sv_info);
 
 /** GPS callback structure with Mediatek extension. */
-typedef struct {
+typedef struct _GpsCallbacks_mtk {
     GpsCallbacks base;
 
     gnss_sv_status_callback_mtk gnss_sv_status_cb;
