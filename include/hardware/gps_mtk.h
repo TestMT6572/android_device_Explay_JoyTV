@@ -72,7 +72,7 @@ typedef void (* gnss_sv_status_callback_mtk)(MTKLegacyGnssSvStatus* sv_info);
 typedef struct _GpsCallbacks_mtk {
     GpsCallbacks base;
 
-    gnss_sv_status_callback gnss_sv_status_cb;
+    gnss_sv_status_callback_mtk gnss_sv_status_cb;
 } GpsCallbacks_mtk;
 
 __END_DECLS
