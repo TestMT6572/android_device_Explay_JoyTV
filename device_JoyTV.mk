@@ -120,6 +120,13 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     Snap
 
+# Charger
+PRODUCT_PACKAGES += \
+    charger \
+    charger_res_images \
+    libnl_2 \
+    libtinyxml
+
 # FM Radio
 PRODUCT_PACKAGES += \
     FMRadio \
