@@ -113,12 +113,16 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 # Sensors
 TARGET_NO_SENSOR_PERMISSION_CHECK := true
 
-# Offline charging
-BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/BOOT/BOOT/boot/boot_mode
+# Camera
+TARGET_HAS_LEGACY_CAMERA_HAL1 := true
+
+# Offline Charging
+WITH_CM_CHARGER := true
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
-BOARD_CHARGER_ENABLE_SUSPEND := true
-BOARD_CHARGER_SHOW_PERCENTAGE := true
-BOARD_HAL_STATIC_LIBRARIES := libhealthd.mtk
+BOARD_CHARGER_ENABLE_SUSPEND := false
+BACKLIGHT_PATH := "/sys/class/leds/lcd-backlight/brightness"
+BOARD_CHARGING_CMDLINE_NAME := "androidboot.mode"
+BOARD_CHARGING_CMDLINE_VALUE := "chargerlogo"
 
 # EGL settings
 BOARD_EGL_CFG := $(LOCAL_PATH)/configs/egl.cfg
