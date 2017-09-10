@@ -942,7 +942,7 @@ service thermal_manager /system/bin/thermal_manager
     user root
     oneshot
 
-service charger /sbin/healthd -c
+service battery_charger /sbin/healthd -c
     class charger
     critical
     seclabel u:r:healthd:s0
