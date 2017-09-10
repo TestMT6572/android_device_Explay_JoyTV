@@ -120,14 +120,12 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     Snap
 
-# Camera properties
-PRODUCT_PROPERTY_OVERRIDES += \
-    media.stagefright.legacyencoder=true \
-    media.stagefright.less-secure=true
-
 # Charger
 PRODUCT_PACKAGES += \
-    charger_res_images
+    charger \
+    charger_res_images \
+    libnl_2 \
+    libtinyxml
 
 # FM Radio
 PRODUCT_PACKAGES += \
