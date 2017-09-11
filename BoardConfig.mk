@@ -24,8 +24,8 @@ TARGET_CPU_MEMCPY_OPT_DISABLE := true
 WITH_DEXPREOPT := false
 DONT_DEXPREOPT_PREBUILTS := true
 
-# Link against libxlog
-TARGET_LDPRELOAD := libxlog.so
+# MTK Shims
+TARGET_LDPRELOAD := libxlog.so:libmtk_symbols.so # for symbols in mtkaudio.cpp + mtksymbols
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := JoyTV
@@ -123,9 +123,6 @@ BOARD_EGL_WORKAROUND_BUG_10194508 := true
 BOARD_EGL_NEEDS_HANDLE_VALUE := true
 BOARD_EGL_NEEDS_FNW := true
 TARGET_REQUIRES_SYNCHRONOUS_SETSURFACE := true
-
-# GPS
-TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
 # WIFI
 WPA_SUPPLICANT_VERSION := VER_0_8_X

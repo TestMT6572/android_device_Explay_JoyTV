@@ -22,7 +22,9 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_PACKAGES += \
     Torch
 
+# MTK Shims
 PRODUCT_PACKAGES += \
+    libmtk_symbols \
     libxlog
 
 # Lights
@@ -48,9 +50,6 @@ PRODUCT_COPY_FILES += \
 # Bluetooth
 PRODUCT_PACKAGES += \
     libbt-vendor
-
-# GSM
-PRODUCT_PACKAGES += libmt6572
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.ril_class=MediaTekRIL
