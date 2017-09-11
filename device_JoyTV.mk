@@ -127,11 +127,6 @@ PRODUCT_PACKAGES += \
     libnl_2 \
     libtinyxml
 
-# FM Radio
-PRODUCT_PACKAGES += \
-    FMRadio \
-    libfmjni
-
 # GPS
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/agps_profiles_conf2.xml:system/etc/agps_profiles_conf2.xml
