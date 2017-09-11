@@ -8,6 +8,8 @@ on early-init
 
 on charger
     mount ext4 /emmc@android /system ro wait
+    start drvbd
+    start ipod
     start servicemanager
 
     # disable USB
@@ -927,10 +929,10 @@ service lsm303md /system/bin/lsm303md
 #sensor service (end)
 #
 
-service shutdown /system/bin/shutdown
+service drvbd /system/bin/drvbd
+    class main	
     user root
     group root
-    disabled
 
 service NvRAMAgent /system/bin/nvram_agent_binder
     class main
@@ -942,9 +944,12 @@ service thermal_manager /system/bin/thermal_manager
     user root
     oneshot
 
-service battery_charger /charger
-    class charger
-    seclabel u:r:healthd:s0
+# Offline charging
+service ipod /system/bin/ipod
+    user root
+    group root
+    class ipo
+    disabled
 #
 # Connectivity related services (Begin)
 #

@@ -120,13 +120,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     Snap
 
-# Charger
-PRODUCT_PACKAGES += \
-    charger \
-    charger_res_images \
-    libnl_2 \
-    libtinyxml
-
 # GPS
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/agps_profiles_conf2.xml:system/etc/agps_profiles_conf2.xml
