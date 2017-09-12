@@ -13,7 +13,7 @@ int _ZN7android16MediaBufferGroupC1Ev(void **buffer) {
 
 void _ZNK7android11MediaSource11ReadOptions9getSeekToEPxPNS1_8SeekModeE(
 	    int64_t *time_us, int32_t *mode) {
-     _ZNK7android12IMediaSource11ReadOptions9getSeekToEPxPNS1_8SeekModeE(time_us, mode);
+     _ZNK7android11MediaSource11ReadOptions9getSeekToEPxPNS1_8SeekModeE(time_us, mode);
 }
 
 int _ZN7android16MediaBufferGroup14acquire_bufferEPPNS_11MediaBufferEb(void **buffer, bool nonBlocking);
