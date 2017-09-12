@@ -1,3 +1,5 @@
+#include <media/stagefright/MediaBufferGroup.h>
+
 extern "C" {
 int _ZN7android16MediaBufferGroupC1Ej(unsigned int);
     int _ZN7android16MediaBufferGroupC1Ev() {
