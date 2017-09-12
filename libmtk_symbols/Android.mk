@@ -16,13 +16,11 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES := \
-    mtk_wmv.cpp \
     mtk_ui.cpp \
     mtk_ril.cpp \
     icu55.c
 
-LOCAL_SHARED_LIBRARIES := libbinder liblog libicuuc libui \
-                          libstagefright libmedia
+LOCAL_SHARED_LIBRARIES := libbinder liblog libicuuc libui
 LOCAL_MODULE := libmtk_symbols
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
 
