@@ -16,7 +16,8 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES := \
-    mtk_wmv.cpp \
+    mtk_wmvB.cpp \
+    mtk_wmvS.cpp \
     mtk_ui.cpp \
     mtk_ril.cpp \
     icu55.c
