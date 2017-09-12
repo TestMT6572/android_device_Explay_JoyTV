@@ -928,10 +928,7 @@ service lsm303md /system/bin/lsm303md
 #
 #sensor service (end)
 #
-# Update the second boot logo
-service bootlogoupdater /system/bin/boot_logo_updater
-    oneshot
-    
+
 service drvbd /system/bin/drvbd
     class main	
     user root
@@ -951,7 +948,7 @@ service thermal_manager /system/bin/thermal_manager
 service ipod /system/bin/ipod
     user root
     group root
-    socket ipohctl stream 0660 root root
+    class ipo
     disabled
 #
 # Connectivity related services (Begin)
