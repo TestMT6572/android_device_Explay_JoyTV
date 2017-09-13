@@ -27,25 +27,11 @@ PRODUCT_PACKAGES += \
     libmtk_symbols \
     libxlog
 
-# Lights
-PRODUCT_PACKAGES += \
-    lights.mt6572
-
-# Audio
-PRODUCT_PACKAGES += \
-    audio.primary.mt6572 \
-    audio_policy.default \
-    audio.a2dp.default \
-    audio.usb.default \
-    audio.r_submix.default \
-    libaudio-resampler \
-    tinymix
-
 PRODUCT_PACKAGES += \
     lib_driver_cmd_mt66xx
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf
+    $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf
     
 # Bluetooth
 PRODUCT_PACKAGES += \
