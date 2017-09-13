@@ -17,7 +17,6 @@ include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES := \
     mtk_ui.cpp \
-    mtk_wmv.cpp \
     mtk_ril.cpp \
     icu51.c
 
