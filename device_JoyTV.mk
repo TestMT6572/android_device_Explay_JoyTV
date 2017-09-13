@@ -105,9 +105,12 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     Snap
 
-# Charger Mode
+# Charger
 PRODUCT_PACKAGES += \
-    charger_res_images
+    charger \
+    charger_res_images \
+    libnl_2 \
+    libtinyxml
 
 # GPS
 PRODUCT_COPY_FILES += \
