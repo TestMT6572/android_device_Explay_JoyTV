@@ -230,130 +230,13 @@ public class MediaTekRIL extends RIL implements CommandsInterface {
          throw new RuntimeException ("invalid hex char '" + c + "'");
     }
 
-    protected Object
-    responseOperatorInfos(Parcel p) {
-        if (mInstanceId == null || mInstanceId == 0) {
-            mSimId = 0;
-        } else {
-            mSimId = mInstanceId;
-        }
-
-        String strings[] = (String [])responseStrings(p);
-        ArrayList<OperatorInfo> ret;
-
-        if (strings.length % 5 != 0) {
-            throw new RuntimeException(
-                "RIL_REQUEST_QUERY_AVAILABLE_NETWORKS: invalid response. Got "
-                + strings.length + " strings, expected multible of 5");
-        }
-
-        String lacStr = SystemProperties.get("gsm.cops.lac");
-        boolean lacValid = false;
-        int lacIndex=0;
-
-        Rlog.d(RILJ_LOG_TAG, "lacStr = " + lacStr+" lacStr.length="+lacStr.length()+" strings.length="+strings.length);
-        if((lacStr.length() > 0) && (lacStr.length()%4 == 0) && ((lacStr.length()/4) == (strings.length/5 ))){
-            Rlog.d(RILJ_LOG_TAG, "lacValid set to true");
-            lacValid = true;
-        }
-
-        SystemProperties.set("gsm.cops.lac","");
-
-        ret = new ArrayList<OperatorInfo>(strings.length / 5);
-
-        for (int i = 0 ; i < strings.length ; i += 5) {
-            if((strings[i+0] != null) && (strings[i+0].startsWith("uCs2") == true)) {        
-                riljLog("responseOperatorInfos handling UCS2 format name");
-
-                try {
-                    strings[i+0] = new String(hexStringToBytes(strings[i+0].substring(4)), "UTF-16");
-                } catch(UnsupportedEncodingException ex) {
-                    riljLog("responseOperatorInfos UnsupportedEncodingException");
-                }
-            }
-
-            if ((lacValid == true) && (strings[i] != null)) {
-                UiccController uiccController = UiccController.getInstance();
-                IccRecords iccRecords = uiccController.getIccRecords(mSimId, UiccController.APP_FAM_3GPP);
-                int lacValue = -1;
-                String sEons = null;
-                String lac = lacStr.substring(lacIndex,lacIndex+4);
-                Rlog.d(RILJ_LOG_TAG, "lacIndex="+lacIndex+" lacValue="+lacValue+" lac="+lac+" plmn numeric="+strings[i+2]+" plmn name"+strings[i+0]);
-
-                if(lac != "") {
-                    lacValue = Integer.parseInt(lac, 16);
-                    lacIndex += 4;
-                    if(lacValue != 0xfffe) {
-                        /*sEons = iccRecords.getEonsIfExist(strings[i+2],lacValue,true);
-                        if(sEons != null) {
-                            strings[i] = sEons;           
-                            Rlog.d(RILJ_LOG_TAG, "plmn name update to Eons: "+strings[i]);
-                        }*/
-                    } else {
-                        Rlog.d(RILJ_LOG_TAG, "invalid lac ignored");
-                    }
-                }
-            }
-
-            if (strings[i] != null && (strings[i].equals("") || strings[i].equals(strings[i+2]))) {
-		Operators init = new Operators ();
-		String temp = init.unOptimizedOperatorReplace(strings[i+2]);
-		riljLog("lookup RIL responseOperatorInfos() " + strings[i+2] + " gave " + temp);
-                strings[i] = temp;
-                strings[i+1] = temp;
-            }
-
-            // 1, 2 = 2G
-            // > 2 = 3G
-            String property_name = "gsm.baseband.capability";
-            if(mSimId > 0) {
-                property_name = property_name + (mSimId+1);
-            }
-
-            int basebandCapability = SystemProperties.getInt(property_name, 3);
-            Rlog.d(RILJ_LOG_TAG, "property_name="+property_name+", basebandCapability=" + basebandCapability);
-            if (3 < basebandCapability) {
-                strings[i+0] = strings[i+0].concat(" " + strings[i+4]);
-                strings[i+1] = strings[i+1].concat(" " + strings[i+4]);
-            }
-
-            ret.add(
-                new OperatorInfo(
-                    strings[i+0],
-                    strings[i+1],
-                    strings[i+2],
-                    strings[i+3]));
-        }
-
-        return ret;
-    }
-
     private Object
     responseCrssNotification(Parcel p) {
-        /*SuppCrssNotification notification = new SuppCrssNotification();
-
-        notification.code = p.readInt();
-        notification.type = p.readInt();
-        notification.number = p.readString();
-        notification.alphaid = p.readString();
-        notification.cli_validity = p.readInt();
-
-        return notification;*/
-
         Rlog.e(RILJ_LOG_TAG, "NOT PROCESSING CRSS NOTIFICATION");
         return null;
     }
 
     private Object responseEtwsNotification(Parcel p) {
-        /*EtwsNotification response = new EtwsNotification();
-        
-        response.warningType = p.readInt();
-        response.messageId = p.readInt();
-        response.serialNumber = p.readInt();
-        response.plmnId = p.readString();
-        response.securityInfo = p.readString();
-        
-        return response;*/
         Rlog.e(RILJ_LOG_TAG, "NOT PROCESSING ETWS NOTIFICATION");
 
         return null;
@@ -390,11 +273,6 @@ public class MediaTekRIL extends RIL implements CommandsInterface {
 
             // either command succeeds or command fails but with data payload
             try {switch (rr.mRequest) {
-            /*
- cat libs/telephony/ril_commands.h \
- | egrep "^ *{RIL_" \
- | sed -re 's/\{([^,]+),[^,]+,([^}]+).+/case \1: ret = \2(p); break;/'
-             */
             case RIL_REQUEST_GET_SIM_STATUS: ret =  responseIccCardStatus(p); break;
             case RIL_REQUEST_ENTER_SIM_PIN: ret =  responseInts(p); break;
             case RIL_REQUEST_ENTER_SIM_PUK: ret =  responseInts(p); break;
@@ -618,10 +496,6 @@ public class MediaTekRIL extends RIL implements CommandsInterface {
                 break;
 
             case RIL_UNSOL_SMS_READY_NOTIFICATION:
-                /*if (mGsmSmsRegistrant != null) {
-                    mGsmSmsRegistrant
-                        .notifyRegistrant();
-                }*/
                 break;
             case RIL_UNSOL_RESPONSE_RADIO_STATE_CHANGED:
 		// intercept and send GPRS_TRANSFER_TYPE and GPRS_CONNECT_TYPE to RIL
@@ -649,11 +523,6 @@ public class MediaTekRIL extends RIL implements CommandsInterface {
 	
 	static String
     requestToString(int request) {
-/*
- cat libs/telephony/ril_commands.h \
- | egrep "^ *{RIL_" \
- | sed -re 's/\{RIL_([^,]+),[^,]+,([^}]+).+/case RIL_\1: return "\1";/'
-*/
         switch(request) {
             case RIL_REQUEST_GET_SIM_STATUS: return "GET_SIM_STATUS";
             case RIL_REQUEST_ENTER_SIM_PIN: return "ENTER_SIM_PIN";
@@ -785,43 +654,6 @@ public class MediaTekRIL extends RIL implements CommandsInterface {
 	    case RIL_REQUEST_SET_3G_CAPABILITY: return "RIL_REQUEST_SET_3G_CAPABILITY";
             default: return "<unknown request>";
         }
-    }
-
-    private Object
-    responseOperator(Parcel p) {
-        int num;
-        String response[] = null;
-
-        response = p.readStringArray();
-
-        if (false) {
-            num = p.readInt();
-
-            response = new String[num];
-            for (int i = 0; i < num; i++) {
-                response[i] = p.readString();
-            }
-        }
-
-        if((response[0] != null) && (response[0].startsWith("uCs2") == true))
-        {        
-            riljLog("responseOperator handling UCS2 format name");			        
-            try{	
-                response[0] = new String(hexStringToBytes(response[0].substring(4)),"UTF-16");
-            }catch(UnsupportedEncodingException ex){
-                riljLog("responseOperatorInfos UnsupportedEncodingException");
-            }			
-        }
-		
-        if (response[0] != null && (response[0].equals("") || response[0].equals(response[2]))) {
-	    Operators init = new Operators ();
-	    String temp = init.unOptimizedOperatorReplace(response[2]);
-	    riljLog("lookup RIL responseOperator() " + response[2] + " gave " + temp + " was " + response[0] + "/" + response[1] + " before.");
-	    response[0] = temp;
-	    response[1] = temp;
-        }
-
-        return response;
     }
 
     private
