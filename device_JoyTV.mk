@@ -107,10 +107,7 @@ PRODUCT_PACKAGES += \
 
 # Charger
 PRODUCT_PACKAGES += \
-    charger \
-    charger_res_images \
-    libnl_2 \
-    libtinyxml
+    charger_res_images
 
 # GPS
 PRODUCT_COPY_FILES += \

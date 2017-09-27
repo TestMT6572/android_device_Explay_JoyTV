@@ -116,10 +116,9 @@ TARGET_NO_SENSOR_PERMISSION_CHECK := true
 
 # Offline charging
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/BOOT/BOOT/boot/boot_mode
-BOARD_CHARGER_DISABLE_INIT_BLANK := true
+BACKLIGHT_PATH := /sys/class/leds/lcd-backlight/brightness
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGER_SHOW_PERCENTAGE := true
-BOARD_HAL_STATIC_LIBRARIES := libhealthd.mtk
 
 # EGL settings
 BOARD_EGL_CFG := $(LOCAL_PATH)/configs/egl.cfg
