@@ -1025,7 +1025,25 @@ public class MediaTekRIL extends RIL implements CommandsInterface {
             if (RILJ_LOGD) riljLog("Not setting data subscription on same SIM");
 	}
     }
+    
+    protected Object
+    responseFailCause(Parcel p) {
+        int numInts;
+        int response[];
 
+        numInts = p.readInt();
+        response = new int[numInts];
+        for (int i = 0 ; i < numInts ; i++) {
+            response[i] = p.readInt();
+        }
+        LastCallFailCause failCause = new LastCallFailCause();
+        failCause.causeCode = response[0];
+        if (p.dataAvail() > 0) {
+          failCause.vendorCause = p.readString();
+        }
+        return failCause;
+    }
+ 
     public void setDataAllowed(boolean allowed, Message result) {
         handle3GSwitch();
 
