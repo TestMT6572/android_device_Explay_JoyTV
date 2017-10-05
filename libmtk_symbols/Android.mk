@@ -16,11 +16,13 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES := \
+    crypto_malloc.c \
+    mtk_wvm.cpp \
     mtk_ui.cpp \
     mtk_ril.cpp \
     icu55.c
 
-LOCAL_SHARED_LIBRARIES := libbinder liblog libicuuc libui
+LOCAL_SHARED_LIBRARIES := libbinder liblog libicuuc libui libcrypto
 LOCAL_MODULE := libmtk_symbols
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
 
